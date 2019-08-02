@@ -1,0 +1,13 @@
+1.) Open your CLI and type command 'npm install'
+2.) Type 'npm start' to run the program
+3.) Type in your browser 'localhost:3000'
+SAMPLE ROUTES:
+localhost:3000/swagger
+localhost:3000/cats
+localhost:3000/dogs
+localhost:3000/birds
+
+GET: 
+POST:
+PUT:
+DELETE:

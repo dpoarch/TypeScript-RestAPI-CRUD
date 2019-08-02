@@ -1,0 +1,872 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "TypeScript-NodeJS-CRUD-REST-API-SWAGGER",
+        "description": "A minimal and easy to follow example of what you need to create a CRUD style API in NodeJs using TypeScript",
+        "license": {}
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "Local Dev, or from Heroku"
+        },
+        {
+            "url": "/api/",
+            "description": "With docker-compose and nginx proxy"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Cats",
+            "description": "API for cats in the system"
+        },
+        {
+            "name": "Birds",
+            "description": "API for birds in the system"
+        },
+        {
+            "name": "Dogs",
+            "description": "API for dogs in the system"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/cats": {
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Get all cats in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Cats"
+                        }
+                    }
+                }
+            },
+            "/dogs": {
+                "get": {
+                    "tags": [
+                        "Dogs"
+                    ],
+                    "summary": "Get all dogs in system",
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "$ref": "#/definitions/Dogs"
+                            }
+                        }
+                    }
+                },
+                "/birds": {
+                    "get": {
+                        "tags": [
+                            "Birds"
+                        ],
+                        "summary": "Get all birds in system",
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Birds"
+                                }
+                            }
+                        }
+                    },
+                    "post": {
+                        "tags": [
+                            "Cats"
+                        ],
+                        "summary": "Create a new cat in system",
+                        "requestBody": {
+                            "description": "Cat Object",
+                            "required": true,
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/definitions/Cat"
+                                    }
+                                }
+                            }
+                        },
+                        "produces": [
+                            "application/json"
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/id"
+                                }
+                            },
+                            "400": {
+                                "description": "Failed. Bad post data."
+                            }
+                        }
+                    },
+                    "tags": [
+                        "Dogs"
+                    ],
+                    "summary": "Create a new dog in system",
+                    "requestBody": {
+                        "description": "Dog Object",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Dogs"
+                                }
+                            }
+                        }
+                    },
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "$ref": "#/definitions/id"
+                            }
+                        },
+                        "400": {
+                            "description": "Failed. Bad post data."
+                        }
+                    }
+                },
+                "tags": [
+                    "Birds"
+                ],
+                "summary": "Create a new bird in system",
+                "requestBody": {
+                    "description": "Dog Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Dog"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/cats/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the cat that we want to match",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Get cat with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Cat with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Cat not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update cat with given ID",
+                "tags": [
+                    "Cats"
+                ],
+                "requestBody": {
+                    "description": "Cat Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Cat"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Cat with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    },
+                    "404": {
+                        "description": "Failed. Cat not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete cat with given ID",
+                "tags": [
+                    "Cats"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Delete Cat with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Cat not found."
+                    }
+                }
+            }
+        },
+        "/dogs": {
+            "get": {
+                "tags": [
+                    "Dogs"
+                ],
+                "summary": "Get all dogs in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Dogs"
+                        }
+                    }
+                }
+            },
+            "/dogs": {
+                "get": {
+                    "tags": [
+                        "Dogs"
+                    ],
+                    "summary": "Get all dogs in system",
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "$ref": "#/definitions/Dogs"
+                            }
+                        }
+                    }
+                },
+                "/birds": {
+                    "get": {
+                        "tags": [
+                            "Birds"
+                        ],
+                        "summary": "Get all birds in system",
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Birds"
+                                }
+                            }
+                        }
+                    },
+                    "post": {
+                        "tags": [
+                            "Cats"
+                        ],
+                        "summary": "Create a new cat in system",
+                        "requestBody": {
+                            "description": "Cat Object",
+                            "required": true,
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/definitions/Cat"
+                                    }
+                                }
+                            }
+                        },
+                        "produces": [
+                            "application/json"
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/id"
+                                }
+                            },
+                            "400": {
+                                "description": "Failed. Bad post data."
+                            }
+                        }
+                    },
+                    "tags": [
+                        "Dogs"
+                    ],
+                    "summary": "Create a new dog in system",
+                    "requestBody": {
+                        "description": "Dog Object",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Dogs"
+                                }
+                            }
+                        }
+                    },
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "$ref": "#/definitions/id"
+                            }
+                        },
+                        "400": {
+                            "description": "Failed. Bad post data."
+                        }
+                    }
+                },
+                "tags": [
+                    "Birds"
+                ],
+                "summary": "Create a new bird in system",
+                "requestBody": {
+                    "description": "Dog Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Dog"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/dogs/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the dog that we want to match",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Dogs"
+                ],
+                "summary": "Get dog with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Dog with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Dog"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Dog not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update dog with given ID",
+                "tags": [
+                    "Dogs"
+                ],
+                "requestBody": {
+                    "description": "Dog Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Dog"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Dog with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Dog"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    },
+                    "404": {
+                        "description": "Failed. Dog not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete dog with given ID",
+                "tags": [
+                    "Dogs"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Delete dog with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Dog not found."
+                    }
+                }
+            }
+        },
+        "/birds": {
+            "get": {
+                "tags": [
+                    "Birds"
+                ],
+                "summary": "Get all birds in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Birds"
+                        }
+                    }
+                }
+            },
+            "/dogs": {
+                "get": {
+                    "tags": [
+                        "Dogs"
+                    ],
+                    "summary": "Get all dogs in system",
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "$ref": "#/definitions/Dogs"
+                            }
+                        }
+                    }
+                },
+                "/birds": {
+                    "get": {
+                        "tags": [
+                            "Birds"
+                        ],
+                        "summary": "Get all birds in system",
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Birds"
+                                }
+                            }
+                        }
+                    },
+                    "post": {
+                        "tags": [
+                            "Cats"
+                        ],
+                        "summary": "Create a new cat in system",
+                        "requestBody": {
+                            "description": "Cat Object",
+                            "required": true,
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/definitions/Cat"
+                                    }
+                                }
+                            }
+                        },
+                        "produces": [
+                            "application/json"
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/id"
+                                }
+                            },
+                            "400": {
+                                "description": "Failed. Bad post data."
+                            }
+                        }
+                    },
+                    "tags": [
+                        "Dogs"
+                    ],
+                    "summary": "Create a new dog in system",
+                    "requestBody": {
+                        "description": "Dog Object",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Dogs"
+                                }
+                            }
+                        }
+                    },
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "$ref": "#/definitions/id"
+                            }
+                        },
+                        "400": {
+                            "description": "Failed. Bad post data."
+                        }
+                    }
+                },
+                "tags": [
+                    "Birds"
+                ],
+                "summary": "Create a new bird in system",
+                "requestBody": {
+                    "description": "Dog Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Dog"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/birds/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the bird that we want to match",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Birds"
+                ],
+                "summary": "Get bird with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Bird with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bird"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Bird not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update bird with given ID",
+                "tags": [
+                    "Birds"
+                ],
+                "requestBody": {
+                    "description": "Bird Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Bird"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Bird with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bird"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    },
+                    "404": {
+                        "description": "Failed. Bird not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete bird with given ID",
+                "tags": [
+                    "Birds"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Delete Bird with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Bird not found."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "Cat": {
+            "type": "object",
+            "properties": {
+                "genus": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "isHungry": {
+                    "type": "boolean"
+                },
+                "lastFedDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "Cats": {
+            "type": "object",
+            "properties": {
+                "cats": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Cat"
+                    }
+                }
+            }
+        },
+        "Dog": {
+            "type": "object",
+            "properties": {
+                "genus": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "isHungry": {
+                    "type": "boolean"
+                },
+                "lastFedDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "Dogs": {
+            "type": "object",
+            "properties": {
+                "cats": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Dog"
+                    }
+                }
+            }
+        },
+        "Bird": {
+            "type": "object",
+            "properties": {
+                "genus": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "isHungry": {
+                    "type": "boolean"
+                },
+                "lastFedDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "Birds": {
+            "type": "object",
+            "properties": {
+                "cats": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Bird"
+                    }
+                }
+            }
+        }
+    }
+}
